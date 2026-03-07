@@ -220,6 +220,7 @@ main > section {
     display: grid;
     gap: 12px;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-auto-rows: 1fr;
 }
 
 #card-list > li {
@@ -232,14 +233,7 @@ main > section {
     border-radius: 4px;
     border-top: 4px solid transparent;
     background: linear-gradient(var(--clr)) border-box;
-
-    & div {
-        border-radius: 4px 4px 0px 0px;
-        background-color: white;
-        padding: 16px;
-        display: grid;
-        gap: 12px;
-    }
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.08);
 
     & header {
         display: flex;
@@ -248,7 +242,12 @@ main > section {
     }
 
     & footer {
+        padding: 16px;
+        display: grid;
+        gap: 16px;
         background-color: white;
+        font-size: 12px;
+        color: var(--clr-blue-400);
     }
 
     & .hl {
@@ -264,16 +263,82 @@ main > section {
         text-align: center;
         border-radius: 100px;
         line-height: 1;
+
+        & img {
+            width: 12px;
+            fill: rgb(var(--clr-hl));
+        }
     }
 
-    & .hl-yellow {
+    & .hl-medium {
         --clr-hl: 245, 158, 11;
     }
 
-    & .hl-gray {
+    & .hl-low {
         --clr-hl: 156, 163, 175;
     }
 
+    & .hl-green {
+        --clr-hl: 0, 169, 110;
+    }
+
+    & .hl-purple {
+        --clr-hl: 168, 85, 247;
+    }
+
+    & .hl-pink {
+        --clr-hl: 247, 0, 107;
+    }
+
+    & .card-content {
+        border-radius: 4px 4px 0px 0px;
+        background-color: white;
+        padding: 16px;
+        display: grid;
+        gap: 12px;
+
+        & h2 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--clr-blue-800);
+            margin-bottom: -8px;
+        }
+
+        & p:not(.hl) {
+            font-size: 12px;
+            color: var(--clr-blue-400);
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+        }
+
+        & ul {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 4px;
+
+            & li {
+                list-style: none;
+                flex: unset;
+                max-width: unset;
+                border: 1px solid rgba(var(--clr-hl), 0.5);
+                padding: 5px 8px;
+                display: flex;
+                align-items: center;
+                gap: 2px;
+            }
+        }
+
+    }
+    & hr {
+        border: unset;
+        background-color: var(--clr-light-300);
+        height: 1px;
+    }
 }
 
-
+.card[data-status="closed"] {
+    --clr: var(--clr-purp-100);
+}
