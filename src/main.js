@@ -2,7 +2,7 @@ let allCards = [];
 const cardList = document.getElementById("card-list");
 const tabList = document.getElementById("tablist");
 const counter = document.querySelector(".values data");
-const thing = {"bug": "high", "help wanted": "medium", "enhancement": "green", "documentation": "purple", "good first issue": "pink"};
+const labelColorMap = {"bug": "high", "help wanted": "medium", "enhancement": "green", "documentation": "purple", "good first issue": "pink"};
 
 async function loadCards() {
     allCards = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
@@ -46,32 +46,31 @@ function renderCards(cards) {
     }
     cardList.innerHTML = '';
     cardList.append(fragment);
+}
 
-    function createDate(dateString) {
-        const date = new Date(dateString);
-        return `<time datetime="${dateString}">${date.toLocaleDateString("en-US", {year: "numeric", month: "long", day: "numeric"})}</time>`;
-    }
+function createDate(dateString) {
+    const date = new Date(dateString);
+    return `<time datetime="${dateString}">${date.toLocaleDateString("en-US", {year: "numeric", month: "long", day: "numeric"})}</time>`;
+}
 
-    function createLabels(labels) {
-        let lis = '';
-        for (const label of labels) {
-            lis += `<li class="hl hl-${thing[label]}"><img src="./assets/${thing[label]}.svg" alt="">${label}</li>`;
-        }
-        return lis;
+function createLabels(labels) {
+    let lis = '';
+    for (const label of labels) {
+        lis += `<li class="hl hl-${labelColorMap[label]}"><img src="./assets/${labelColorMap[label]}.svg" alt="">${label}</li>`;
     }
+    return lis;
 }
 
 tabList.addEventListener('click', e => {
-    if (e.target.closest("button") == null) return;
+    const btn = e.target.closest('button');
+    if (btn == null) return;
 
-    const btn = e.target;
     for (const button of tabList.children) {
         button.setAttribute("aria-selected", button == btn ? "true" : "false");
     }
 
     const status = btn.dataset.filter;
-    renderCards(allCards.filter(card => status == "all" || card.status == status));
-
+    renderCards(status == "all" ? allCards : allCards.filter(card.status == status));
 });
 
 loadCards();
