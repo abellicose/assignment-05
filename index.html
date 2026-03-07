@@ -1,12 +1,53 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">   
+    <link rel="stylesheet" href="./src/login.css">
     <title>Assignment-05</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+</head>
+<body>
+    <main>
+        <section id="login">
+            <header>
+                <img src="./assets/github-logo.png" alt="github logo">
+                <div>
+                    <h1>Github Issues Tracker</h1>
+                    <p>Sign in to manage your issues</p>
+                </div>
+            </header>
+
+            <form id="form">
+                <div>
+                    <label for="username">Username</label>
+                    <input type="text" id="username" placeholder="Enter Username" required aria-describedby="username-hint">
+                    <p id="username-hint">Default: admin</p>
+                </div>
+
+                <div>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter Password" required aria-describedby="password-hint">
+                    <p id="password-hint" >Default: admin123</p>
+                </div>
+
+                <button id="form-submit" type="submit">Sign In</button>
+            </form>
+
+            <div id="error-message" hidden>Username or Password is wrong!</div>
+            
+            <div class="divider">OR</div>
+            <div class="demo">
+                <h2>Demo Credentials:</h2>
+                <div class="demo-creds">
+                    <p>Username: <span>admin</span></p>
+                    <p>Password: <span>admin123</span></p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="./src/login.js"></script>
+</body>
 </html>

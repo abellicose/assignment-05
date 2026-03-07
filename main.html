@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">   
+    <link rel="stylesheet" href="./src/main.css">
+    <title>Assignment-05</title>
+</head>
+<body>
+    <header id="header">
+        <div class="logo-container">
+            <img src="./assets/github-logo.png" alt="github logo">
+            <h1>Github Issues Tracker</h1>
+        </div>
+        <form id="search">
+            <input type="search" id="search-input" placeholder="Search issues...">
+            <button class="button-primary" type="submit">Search</button>
+        </form>
+    </header>
+    <main>
+        <section id="tab">
+            <div id="tablist">
+                <button aria-selected="true" data-filter="all">All</button>
+                <button aria-selected="false" data-filter="open">Open</button>
+                <button aria-selected="false" data-filter="closed">Closed</button>
+            </div>
+
+            <div class="tab-data">
+                <div class="tracker">
+                    <div class="data">
+                        <img src="./assets/aperture.png" alt="aperture">
+                        <div class="values">
+                            <data value="50">50 Issues</data>
+                            <p>Track and manage all your project issues</p>
+                        </div>
+                    </div>
+                    <ul class="status-counts">
+                        <li>
+                            <span class="dot open"></span>
+                            <span>Open</span>
+                        </li>
+                        <li>
+                            <span class="dot closed"></span>
+                            <span>Closed</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="tabpanel">
+                    <ul id="card-list">
+                        <li>
+                            <article class="card" data-status="open">
+                                <div>
+                                    <header>
+                                        <img src="./assets/open.png" alt="open marker">
+                                        <p class="priority hl hl-red">High</p>
+                                    </header>
+                                    <h2>Fix navigation menu on mobile devices</h2>
+                                    <p>The navigation menu doesn't collapse properly on mobile devices. Need to fix the responsive behavior.</p>
+
+                                    <ul>
+                                        <li><img class="hl hl-red" src="./assets/bug.svg" alt="">Bug</li>
+                                        <li><img class="hl hl-yellow" src="./assets/help.svg" alt="">Help Wanted</li>
+                                    </ul>
+                                </div>
+
+                                <hr>
+
+                                <footer>
+                                    <p>#1 by john_doe</p>
+                                    <time datetime="2024-01-15">Jan 15, 2024</time>
+                                </footer>
+                            </article>
+                        </li>
+
+                        <li>
+                            <article class="card" data-status="open">
+                                <div>
+                                    <header>
+                                        <img src="./assets/open.png" alt="open marker">
+                                        <p class="priority hl hl-yellow">High</p>
+                                    </header>
+                                    <h2>Fix navigation menu on mobile devices</h2>
+                                    <p>The navigation menu doesn't collapse properly on mobile devices. Need to fix the responsive behavior.</p>
+
+                                    <ul>
+                                        <li><img class="hl-red" src="./assets/bug.svg" alt="">Bug</li>
+                                        <li><img class="hl-yellow" src="./assets/help.svg" alt="">Help Wanted</li>
+                                    </ul>
+                                </div>
+
+                                <hr>
+
+                                <footer>
+                                    <p>#1 by john_doe</p>
+                                    <time datetime="2024-01-15">Jan 15, 2024</time>
+                                </footer>
+                            </article>
+                        </li>
+                        <li>
+                            <article class="card" data-status="open">
+                                <div>
+                                    <header>
+                                        <img src="./assets/open.png" alt="open marker">
+                                        <p class="priority hl hl-gray">High</p>
+                                    </header>
+                                    <h2>Fix navigation menu on mobile devices</h2>
+                                    <p>The navigation menu doesn't collapse properly on mobile devices. Need to fix the responsive behavior.</p>
+
+                                    <ul>
+                                        <li><img class="hl-red" src="./assets/bug.svg" alt="">Bug</li>
+                                        <li><img class="hl-yellow" src="./assets/help.svg" alt="">Help Wanted</li>
+                                    </ul>
+                                </div>
+
+                                <hr>
+
+                                <footer>
+                                    <p>#1 by john_doe</p>
+                                    <time datetime="2024-01-15">Jan 15, 2024</time>
+                                </footer>
+                            </article>
+                        </li>
+                        <li>
+                            <article class="card" data-status="open">
+                                <div>
+                                    <header>
+                                        <img src="./assets/open.png" alt="open marker">
+                                        <p class="priority hl-red">High</p>
+                                    </header>
+                                    <h2>Fix navigation menu on mobile devices</h2>
+                                    <p>The navigation menu doesn't collapse properly on mobile devices. Need to fix the responsive behavior.</p>
+
+                                    <ul>
+                                        <li><img class="hl-red" src="./assets/bug.svg" alt="">Bug</li>
+                                        <li><img class="hl-yellow" src="./assets/help.svg" alt="">Help Wanted</li>
+                                    </ul>
+                                </div>
+
+                                <hr>
+
+                                <footer>
+                                    <p>#1 by john_doe</p>
+                                    <time datetime="2024-01-15">Jan 15, 2024</time>
+                                </footer>
+                            </article>
+                        </li>
+                    </ul>
+
+
+                </div>
+
+            </div>
+        </section>
+    </main>
+</body>
+</html>
