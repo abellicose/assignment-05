@@ -3,8 +3,10 @@ const cardList = document.getElementById("card-list");
 const tabList = document.getElementById("tablist");
 const counter = document.querySelector(".values data");
 const labelColorMap = {"bug": "high", "help wanted": "medium", "enhancement": "green", "documentation": "purple", "good first issue": "pink"};
+const modal = document.getElementById("modal");
 
 async function loadCards() {
+    await new Promise(resolve => setTimeout(resolve, 500));
     allCards = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
     .then(res => res.json())
     .then(json => json.data);
@@ -19,26 +21,28 @@ function renderCards(cards) {
         const cardStatus = card.status;
         const cardPriority = card.priority;
         li.innerHTML = `
-                        <article class="card" data-status="${cardStatus}">
-                            <div class="card-content">
-                                <header>
-                                    <img src="./assets/${cardStatus}.png" alt="${cardStatus} marker">
-                                    <p class="hl hl-${cardPriority}">${cardPriority}</p>
-                                </header>
-                                <h2>${card.title}</h2>
-                                <p>${card.description}</p>
+                        <article class="card" data-id="${card.id}" data-status="${cardStatus}">
+                            <div class="card-container">
+                                <div class="card-content">
+                                    <header>
+                                        <img src="./assets/${cardStatus}.png" alt="${cardStatus} marker">
+                                        <p class="hl hl-${cardPriority}">${cardPriority}</p>
+                                    </header>
+                                    <h2>${card.title}</h2>
+                                    <p>${card.description}</p>
 
-                                <ul>
-                                    ${createLabels(card.labels)}
-                                </ul>
+                                    <ul class="hl-container">
+                                        ${createLabels(card.labels)}
+                                    </ul>
+                                </div>
+
+                                <hr>
+
+                                <footer>
+                                    <p>#${card.id} by ${card.author}</p>
+                                    ${createDate(card.createdAt)}
+                                </footer>
                             </div>
-
-                            <hr>
-
-                            <footer>
-                                <p>#${card.id} by ${card.author}</p>
-                                ${createDate(card.createdAt)}
-                            </footer>
                         </article>
         `;
         fragment.append(li);
@@ -70,7 +74,52 @@ tabList.addEventListener('click', e => {
     }
 
     const status = btn.dataset.filter;
-    renderCards(status == "all" ? allCards : allCards.filter(card.status == status));
+    renderCards(status == "all" ? allCards : allCards.filter(card => card.status == status));
+});
+
+cardList.addEventListener('click', async(e) => {
+    const card = e.target.closest(".card");
+    if (card == null) return;
+
+    modal.innerHTML = '<div class="loader"></div>';
+    modal.showModal();
+
+    const data = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${card.dataset.id * 1}`).then(res => res.json()).then(json => json.data);
+    const priority = allCards[data.id - 1].priority;
+    modal.innerHTML = `
+                    <article>
+                        <header>
+                            <h2>${data.title}</h2>
+                            <div class="modal-status">
+                                <p data-status="${data.status}">${data.status}</p>
+                                <ul>
+                                    <li>Opened by ${data.author.replace("_", " ")}</li>
+                                    <li>${createDate(data.createdAt)}</li>
+                                </ul>
+                            </div>
+                        </header>
+                        <ul class="hl-container">
+                            ${createLabels(data.labels)}
+                        </ul>
+                        <p class="description">${data.description}</p>
+
+                        <dl class="meta">
+                            <div>
+                                <dt>Assignee</dt>
+                                <dd class="meta-title">${data.assignee.replace("_", " ")}</dd>
+                            </div>
+                            <div>
+                                <dt>Priority</dt>
+                                <dd class="meta-priority" data-priority="${priority}">${priority}</dd>
+                            </div>
+                        </dl>
+                        <div class="button-container">
+                            <button commandfor="modal" command="close">Close</button>
+                        </div>
+                    </article>
+                `;
+
 });
 
 loadCards();
+
