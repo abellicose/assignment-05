@@ -35,16 +35,24 @@
 }
 
 #header {
-    padding: 16px 80px;
     border: 1px solid #E9E9E9;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+
+    & .header-container {
+        padding: 16px;
+        width: min(1440px, 100%);
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        margin-inline: auto;
+        gap: 20px;
+    }
 }
 
 .logo-container {
     display: flex;
     gap: 4px;
+    align-items: center;
 }
 
 .logo-container img {
@@ -99,7 +107,7 @@
 
 main {
     background-color: var(--clr-light-200);
-    padding: 60px 245px;
+    padding-block: 60px;
 }
 
 main > section {
@@ -220,7 +228,7 @@ main > section {
 #card-list {
     display: grid;
     gap: 12px;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     grid-auto-rows: 1fr;
 }
 
@@ -363,6 +371,7 @@ main > section {
     margin: auto;
     border: unset;
     &:open {
+        width: min(700px, 100%);
         display: flex;
         flex-direction: column;
     }
@@ -488,4 +497,14 @@ main > section {
 
 #modal::backdrop {
     background-color: #002C5C66;
+}
+
+@media (width <= 728px) {
+    #header .header-container {
+        justify-content: space-around;
+    }
+
+    #tablist {
+        justify-content: center;
+    }
 }

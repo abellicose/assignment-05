@@ -4,6 +4,8 @@ const tabList = document.getElementById("tablist");
 const counter = document.querySelector(".values data");
 const labelColorMap = {"bug": "high", "help wanted": "medium", "enhancement": "green", "documentation": "purple", "good first issue": "pink"};
 const modal = document.getElementById("modal");
+const search = document.getElementById("search");
+const searchInput = document.getElementById("search-input");
 
 async function loadCards() {
     await new Promise(resolve => setTimeout(resolve, 500));
@@ -120,6 +122,20 @@ cardList.addEventListener('click', async(e) => {
                 `;
 
 });
+
+search.addEventListener('submit', async(e) => {
+    e.preventDefault();
+
+    const query = searchInput.value;
+    if (!query) return;
+
+    const data = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchInput.value}`).then(res => res.json()).then(json => json.data);
+
+    cardList.innerHTML = '<div class="loader"></div>';
+    await new Promise(resolve => setTimeout(resolve, 500));
+    renderCards(data);
+});
+
 
 loadCards();
 
