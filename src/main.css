@@ -99,6 +99,7 @@
     line-height: 1;
     font-weight: 600;
     color: white;
+    cursor: pointer;
 
     img {
         width: 16px;
